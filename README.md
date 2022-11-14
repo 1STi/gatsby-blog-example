@@ -1,54 +1,42 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+## 🚀 GrapgCMS + Gatsby Example
 
-## 🚀 Quick start
+1.  **Configurar o plugin gatsby-source-graphql.**
 
-1.  **Create a Gatsby site.**
+    gatsby-config.js
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
-
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
+    ```javascript
+      module.exports = {
+        siteMetadata: {
+          title: `My BLog`,
+          siteUrl: `https://www.yourdomain.tld`
+        },
+        plugins: [
+          "gatsby-plugin-styled-components",
+          {
+            resolve: "gatsby-source-graphql", // library
+            options: {
+              // Arbitrary name for the remote schema Query type
+              typeName: "blog",
+              // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
+              fieldName: "blog",
+              // Url to query from
+              url: "https://api-us-west-2.graphcms.com/v2/ckswablvp0pvy01z5ew7ths5e/master", // url da api graphCMS
+            },
+          },
+        ]
+      };
     ```
 
-2.  **Start developing.**
+2.  **Criar o template que receberá os dados dinâmicos**
 
-    Navigate into your new site’s directory and start it up.
+    O arquivo de template fica em /src/components/PostTemplate.js
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
 
-3.  **Open the code and start customizing!**
+3.  **Gerar páginas dinamicamente no build.**
 
-    Your site is now running at http://localhost:8000!
+    Toda a configuração do build está no arquivo gatsby-node.js
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+4.  **Visitar Páginas.**
 
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+    1 - npm run develop
+    2- Acesse localhost:8000/blog
